@@ -1,69 +1,63 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import Table from "./Table.vue";
 
 interface Data {
   company: string;
-  contact: string;
-  country: string;
+  credit: number;
+  margin: number;
 }
 
-const headers = ref<{ properties: string; display: string }[]>([
+const headers = ref<{ properties: string; label: string }[]>([
   {
     properties: "",
-    display: "No",
+    label: "No",
   },
   {
     properties: "company",
-    display: "Company",
+    label: "Company",
   },
   {
-    properties: "contact",
-    display: "Contact",
+    properties: "credit",
+    label: "Credit",
   },
   {
-    properties: "country",
-    display: "Country",
+    properties: "margin",
+    label: "Margin",
   },
 ]);
 
 const datas = ref<Data[]>([
   {
     company: "Salim Group 1",
-    contact: "Agus Salim Satu",
-    country: "Belanda",
+    credit: 5000,
+    margin: 4000,
   },
   {
     company: "Salim Group 2",
-    contact: "Agus Salim Dua",
-    country: "Indonesia",
+    credit: 5000,
+    margin: 4000,
   },
   {
     company: "Salim Group 3",
-    contact: "Agus Salim Tiga",
-    country: "Singapura",
+    credit: 5000,
+    margin: 4000,
   },
   {
     company: "Salim Group 4",
-    contact: "Agus Salim Empat",
-    country: "USA",
+    credit: 5000,
+    margin: 4000,
   },
 ]);
+
+const footers = ref<any[]>(["", "Total", 20000, 16000]);
 </script>
 
 <template>
-  <p>Table</p>
-  <table>
-    <tr>
-      <th v-for="(head, i) in headers" :key="i">{{ head.display }}</th>
-    </tr>
-    <tr v-for="(data, i) in datas" :key="i">
-      <td v-for="(head, y) in headers" :key="y">
-        {{
-          head.properties !== "" ? data[head.properties as keyof Data] : i + 1
-        }}
-      </td>
-    </tr>
-  </table>
+  <Table :headers="headers" :datas="datas" :footers="footers">
+    <template #extendHeaderTable> <th>Action</th> </template>
+    <template #extendDataTable><td>Edit | Delete</td></template>
+  </Table>
 </template>
 
 <style scoped></style>
