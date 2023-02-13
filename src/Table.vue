@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   headers: { properties: string; label: string }[];
-  datas: object[];
+  datas: any[];
   footers?: any[];
 }>();
 </script>

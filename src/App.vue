@@ -55,8 +55,10 @@ const footers = ref<any[]>(["", "Total", 20000, 16000]);
 
 <template>
   <Table :headers="headers" :datas="datas" :footers="footers">
-    <template #extendHeaderTable> <th>Action</th> </template>
-    <template #extendDataTable><td>Edit | Delete</td></template>
+    <template #extendHeaderTable><th>Action</th></template>
+    <template #extendDataTable="tableProps">
+      <td>Edit | Delete {{ tableProps.data }}</td>
+    </template>
   </Table>
 </template>
 
